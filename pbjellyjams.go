@@ -1,6 +1,7 @@
 package main
 
 import (
+	"embed"
 	"fmt"
 	"html/template"
 	"log"
@@ -10,8 +11,11 @@ import (
 var tmp *template.Template
 var PORT_STR = ":6969"
 
+// go:embed html/*
+var htmls embed.FS
+
 func loadTemplate() {
-	t, err := template.ParseFiles("index.html")
+	t, err := template.ParseFS(htmls, "html/index.html")
 	if err != nil {
 		panic(err)
 	}
@@ -19,15 +23,15 @@ func loadTemplate() {
 }
 
 func rootHandler(writer http.ResponseWriter, request *http.Request) {
-	tmp.Execute(writer, nil)
+	tmp.ExecuteTemplate(writer, "index.html", nil)
 }
 
 func main() {
 	loadTemplate()
 	http.Handle(
-		"/assets/",
+		"/assets",
 		http.StripPrefix(
-			"/assets/",
+			"/assets",
 			http.FileServer(http.Dir("./assets/")),
 		),
 	)
