@@ -1,0 +1,28 @@
+* {
+	margin: 0;
+}
+
+html, body {
+	height: 100%;
+}
+
+html {
+	font-size: 48px;
+	font-family: "Jersey 10", sans-serif;
+	background: black;
+}
+
+body {
+    background-image: url("iconic-pb.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+main {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+}
+
