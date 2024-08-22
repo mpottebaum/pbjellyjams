@@ -26,3 +26,40 @@ main {
 	text-align: center;
 }
 
+button {
+    color: inherit;
+    padding-block: 0;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    font-family: inherit;
+    cursor: inherit;
+}
+
+a {
+    text-decoration: none;
+}
+
+p {
+    font-style: inherit;
+    color: black;
+    font-size: 1rem;
+    cursor: inherit;
+}
+
+.yt-link {
+    animation-name: flash;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes flash {
+    from {
+	color: black;
+    }
+
+    to {
+	color: white;
+    }
+}
+
