@@ -8,7 +8,7 @@ primary_region = 'ewr'
 
 [build]
   [build.args]
-    GO_VERSION = '1.21.4'
+    GO_VERSION = '1.22.0'
 
 [env]
   PORT = '6969'
@@ -27,5 +27,5 @@ primary_region = 'ewr'
   cpus = 1
 
 [[statics]]
-  guest_path = '/assets'
+  guest_path = '/app/assets'
   url_prefix = '/assets'
