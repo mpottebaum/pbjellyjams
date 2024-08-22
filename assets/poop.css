@@ -26,3 +26,24 @@ main {
 	text-align: center;
 }
 
+button {
+    color: inherit;
+    padding-block: 0;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    font-family: inherit;
+    cursor: inherit;
+}
+
+a {
+    text-decoration: none;
+}
+
+p {
+    font-style: inherit;
+    color: black;
+    font-size: 1rem;
+    cursor: inherit;
+}
+
