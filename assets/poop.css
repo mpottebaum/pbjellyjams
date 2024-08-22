@@ -47,3 +47,19 @@ p {
     cursor: inherit;
 }
 
+.yt-link {
+    animation-name: flash;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes flash {
+    from {
+	color: black;
+    }
+
+    to {
+	color: white;
+    }
+}
+
