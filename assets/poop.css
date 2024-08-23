@@ -1,15 +1,20 @@
 * {
-	margin: 0;
+    margin: 0;
 }
 
 html, body {
-	height: 100%;
+    height: 100%;
+}
+
+body, main {
+    display: flex;
 }
 
 html {
-	font-size: 48px;
-	font-family: "Jersey 10", sans-serif;
-	background: black;
+    font-size: 48px;
+    font-family: "Jersey 10", sans-serif;
+    background: black;
+    color: black;
 }
 
 body {
@@ -19,11 +24,15 @@ body {
 }
 
 main {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	text-align: center;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0.4rem;
+}
+
+main article:not(:last-child) {
+    padding-bottom: 0.25rem;
 }
 
 button {
@@ -38,28 +47,50 @@ button {
 
 a {
     text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style-type: disclosure-closed;
+}
+
+li:hover {
+    color: white;
+}
+
+h1 {
+    font-size: 2rem;
+    line-height: 1.5rem;
+}
+
+h2 {
+    font-size: 1.5rem;
 }
 
 p {
     font-style: inherit;
-    color: black;
     font-size: 1rem;
     cursor: inherit;
+    color: inherit;
 }
 
-.yt-link {
+.flasher {
     animation-name: flash;
-    animation-duration: 1.5s;
+    animation-duration: 3s;
     animation-iteration-count: infinite;
 }
 
 @keyframes flash {
-    from {
+    0% {
 	color: black;
     }
 
-    to {
+    40% {
 	color: white;
+    }
+
+    80% {
+	color: #FE74BF;
     }
 }
 
