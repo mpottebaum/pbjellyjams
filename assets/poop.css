@@ -79,6 +79,34 @@ p {
     color: inherit;
 }
 
+img {
+    max-width: 320px;
+}
+
+.ibd-font {
+    color: white;
+}
+
+.ibd-story {
+    background-color: black;
+    border-radius: 3px;
+}
+
+article:has( > .ibd-story) {
+    padding: 0.5rem 0;
+}
+
+h3:has(+ .ibd-story) {
+    padding-bottom: 0.2rem;
+}
+
+.ibd-story > p {
+    font-size: 0.8rem;
+    line-height: 0.65rem;
+    text-align: left;
+    padding: 0.2rem;
+}
+
 .flasher {
     animation-name: flash;
     animation-duration: 3s;

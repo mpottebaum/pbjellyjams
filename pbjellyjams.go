@@ -20,6 +20,10 @@ func main() {
 		t.ExecuteTemplate(w, "index.html", nil)
 	})
 
+	http.HandleFunc("/itty-bitty-ditties", func(w http.ResponseWriter, r *http.Request) {
+		t.ExecuteTemplate(w, "ibd.html", nil)
+	})
+
 	log.Println("listening on", PORT_STR)
 	log.Fatal(http.ListenAndServe(PORT_STR, nil))
 }
