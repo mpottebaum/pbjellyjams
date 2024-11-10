@@ -6,8 +6,9 @@ html, body {
     height: 100%;
 }
 
-body, main {
+html, body, main {
     display: flex;
+    flex-direction: column;
 }
 
 html {
@@ -15,6 +16,10 @@ html {
     font-family: "Jersey 10", sans-serif;
     background: black;
     color: black;
+}
+
+body, main {
+    align-items: center;
 }
 
 body {
@@ -25,10 +30,9 @@ body {
 
 main {
     width: 100%;
-    flex-direction: column;
-    align-items: center;
     text-align: center;
-    padding: 0.4rem;
+    padding: 0.4rem 0;
+    max-width: 1400px;
 }
 
 main article:not(:last-child) {
@@ -87,13 +91,19 @@ img {
     color: white;
 }
 
-.ibd-story {
-    background-color: black;
-    border-radius: 3px;
+.ibd-links {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 8px;
+    padding: 0.4rem;
 }
 
 article:has( > .ibd-story) {
+    background-color: black;
     padding: 0.5rem 0;
+}
+
+.ibd-story {
+    padding: 0 0.4rem;
 }
 
 h3:has(+ .ibd-story) {
@@ -104,7 +114,11 @@ h3:has(+ .ibd-story) {
     font-size: 0.8rem;
     line-height: 0.65rem;
     text-align: left;
-    padding: 0.2rem;
+    padding: 0.2rem 0;
+}
+
+.ibd-story > img {
+    padding: 0.6rem 0;
 }
 
 .flasher {
@@ -124,6 +138,12 @@ h3:has(+ .ibd-story) {
 
     80% {
 	color: #FE74BF;
+    }
+}
+
+@media (min-width: 900px) {
+    img {
+	max-width: 600px;
     }
 }
 
