@@ -1,16 +1,15 @@
 let isMenuOpen = false;
-const menuClosedHTML = '<p>MENU <span id="menu-tri">&#9650;</span></p>';
-const menuOpenHTML = '<p>MENU <span id="menu-tri">&#9660;</span></p>';
-const menuBtn = document.getElementById('menu');
+const menuTriClosed = '&#9650;';
+const menuTriOpen = '&#9660;';
 const linksParent = document.getElementsByClassName('menu-links-init')[0];
-menuBtn.addEventListener('click', function menuButtClicker() {
+menu.addEventListener('click', function menuButtClicker() {
 	if (!isMenuOpen) {
-		menuBtn.innerHTML = menuOpenHTML;
+		menuTri.innerHTML = menuTriOpen;
 		linksParent.className = 'menu-links-open';
 		isMenuOpen = true;
 		return;
 	}
-	menuBtn.innerHTML = menuClosedHTML;
+	menuTri.innerHTML = menuTriClosed;
 	linksParent.className = 'menu-links-closed';
 	isMenuOpen = false;
 });
