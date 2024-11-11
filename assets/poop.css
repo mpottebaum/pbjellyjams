@@ -34,15 +34,22 @@ nav {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0.4rem;
-}
-
-nav > button > p {
-    display: flex;
-    align-items: center;
+    width: 100%;
+    padding-bottom: 0.4rem;
 }
 
 #menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: black;
+    padding: 0.4rem 0;
+    z-index: 1;
+    cursor: pointer;
+}
+
+#menu > p {
     display: flex;
     align-items: center;
 }
@@ -50,6 +57,20 @@ nav > button > p {
 #menu-tri {
     font-size: 0.4rem;
     padding-left: 0.2rem;
+}
+
+.menu-links-init {
+    display: none;
+}
+
+.menu-links-closed {
+    display: none;
+    animation: 500ms ease-in 0s slider-out;
+}
+
+.menu-links-open {
+    display: block;
+    animation: 500ms ease-in 0s slider-in;
 }
 
 main {
@@ -175,6 +196,46 @@ h3:has(+ .ibd-story) {
 
     80% {
 	color: #FE74BF;
+    }
+}
+
+@keyframes slider-in {
+    0% {
+	transform: translateY(-100%);
+    }
+
+    20% {
+	transform: translateY(-80%);
+    }
+
+    40% {
+	transform: translateY(-60%);
+    }
+
+    80% {
+	transform: translateY(20%);
+    }
+}
+
+@keyframes slider-out {
+    0% {
+	transform: translateY(0%);
+	display: block;
+    }
+
+    20% {
+	transform: translateY(-40%);
+	display: block;
+    }
+
+    40% {
+	transform: translateY(-80%);
+	display: block;
+    }
+
+    60% {
+	transform: translateY(-100%);
+	display: none;
     }
 }
 
