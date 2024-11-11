@@ -30,12 +30,16 @@ body {
 
 nav {
     color: white;
-    width: 100%;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 0.4rem;
+}
+
+nav > button > p {
+    display: flex;
+    align-items: center;
 }
 
 #menu {
@@ -44,7 +48,8 @@ nav {
 }
 
 #menu-tri {
-    font-size: 0.8rem;
+    font-size: 0.4rem;
+    padding-left: 0.2rem;
 }
 
 main {
@@ -111,6 +116,15 @@ img {
     color: white;
 }
 
+.ibd-cover-wrap {
+    display: flex;
+    flex-direction: column;
+}
+
+.ibd-cover-wrap > img {
+    padding-bottom: 0.25rem;
+}
+
 .ibd-links {
     background-color: rgba(0, 0, 0, 0.7);
     border-radius: 8px;
@@ -167,6 +181,23 @@ h3:has(+ .ibd-story) {
 @media (min-width: 900px) {
     img {
 	max-width: 600px;
+    }
+
+    .ibd-cover-wrap {
+        flex-direction: row;
+	align-items: center;
+    }
+
+    .ibd-cover-wrap > img {
+	max-width: 400px;
+	padding-bottom: 0;
+    }
+
+    .ibd-links {
+	margin-left: 0.5rem;
+	justify-content: center;
+	width: 300px;
+	height: fit-content;
     }
 }
 
