@@ -76,7 +76,6 @@ nav {
 main {
     width: 100%;
     text-align: center;
-    max-width: 1400px;
 }
 
 main article:not(:last-child) {
@@ -158,10 +157,15 @@ img {
 article:has( > .ibd-story) {
     background-color: black;
     padding: 0.5rem 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .ibd-story {
     padding: 0 0.4rem;
+    max-width: 1400px;
 }
 
 h3:has(+ .ibd-story) {
