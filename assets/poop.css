@@ -6,7 +6,7 @@ html, body {
     height: 100%;
 }
 
-html, body, main {
+html, body, main, nav, .ibd-cover-wrap, .ibd-links, article:has( > .ibd-story) {
     display: flex;
     flex-direction: column;
 }
@@ -18,29 +18,23 @@ html {
     color: black;
 }
 
-body, main {
+body, main, nav, #menu, #menu > p, .ibd-links, article:has( > .ibd-story) {
     align-items: center;
 }
 
 body {
-    background-image: url("iconic-pb.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
+    background: no-repeat 0% 0%/cover url("iconic-pb.jpg");
 }
 
 nav {
     color: white;
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     width: 100%;
     padding-bottom: 0.4rem;
 }
 
 #menu {
     display: flex;
-    align-items: center;
     justify-content: center;
     width: 100%;
     background-color: black;
@@ -51,7 +45,6 @@ nav {
 
 #menu > p {
     display: flex;
-    align-items: center;
 }
 
 #menuTri {
@@ -124,8 +117,6 @@ p {
     font-style: inherit;
     font-size: 1rem;
     line-height: 0.75rem;
-    cursor: inherit;
-    color: inherit;
 }
 
 img {
@@ -136,11 +127,6 @@ img {
     color: white;
 }
 
-.ibd-cover-wrap {
-    display: flex;
-    flex-direction: column;
-}
-
 .ibd-cover-wrap > img {
     padding-bottom: 0.25rem;
 }
@@ -149,18 +135,12 @@ img {
     background-color: rgba(0, 0, 0, 0.7);
     border-radius: 8px;
     padding: 0.4rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 article:has( > .ibd-story) {
     background-color: black;
     padding: 0.5rem 0;
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .ibd-story {
