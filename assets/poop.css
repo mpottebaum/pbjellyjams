@@ -228,6 +228,10 @@ h3:has(+ .ibd-story) {
 	max-width: 600px;
     }
 
+    main article.ibd-cover-wrap {
+	padding: 1rem 0 4rem 0;
+    }
+
     .ibd-cover-wrap {
         flex-direction: row;
 	align-items: center;
@@ -243,6 +247,10 @@ h3:has(+ .ibd-story) {
 	justify-content: center;
 	width: 300px;
 	height: fit-content;
+    }
+    
+    h3:has(+ .ibd-story) {
+	font-size: 3rem;
     }
 }
 
