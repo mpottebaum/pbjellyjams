@@ -6,8 +6,9 @@ html, body {
     height: 100%;
 }
 
-body, main {
+html, body, main, nav, .ibd-cover-links-wrap, .ibd-links, article:has( > .ibd-story) {
     display: flex;
+    flex-direction: column;
 }
 
 html {
@@ -17,18 +18,57 @@ html {
     color: black;
 }
 
+body, main, nav, #menu, #menu > p, .ibd-links, article:has( > .ibd-story) {
+    align-items: center;
+}
+
 body {
-    background-image: url("iconic-pb.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
+    background: no-repeat 0% 0%/cover url("iconic-pb.jpg");
+}
+
+nav {
+    color: white;
+    text-align: center;
+    width: 100%;
+    padding-bottom: 0.4rem;
+}
+
+#menu {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: black;
+    padding: 0.4rem 0;
+    z-index: 1;
+    cursor: pointer;
+}
+
+#menu > p {
+    display: flex;
+}
+
+#menuTri {
+    font-size: 0.4rem;
+    padding-left: 0.2rem;
+}
+
+.menu-links-init {
+    display: none;
+}
+
+.menu-links-closed {
+    display: none;
+    animation: 500ms ease-in 0s slider-out;
+}
+
+.menu-links-open {
+    display: block;
+    animation: 500ms ease-in 0s slider-in;
 }
 
 main {
     width: 100%;
-    flex-direction: column;
-    align-items: center;
     text-align: center;
-    padding: 0.4rem;
 }
 
 main article:not(:last-child) {
@@ -48,10 +88,13 @@ button {
 a {
     text-decoration: none;
     color: inherit;
+    display: inline-block;
 }
 
 ul {
     list-style-type: disclosure-closed;
+    padding-inline-start: 0;
+    width: fit-content;
 }
 
 li:hover {
@@ -75,8 +118,58 @@ p {
     font-style: inherit;
     font-size: 1rem;
     line-height: 0.75rem;
-    cursor: inherit;
-    color: inherit;
+}
+
+img {
+    max-width: 320px;
+}
+
+.ibd-font {
+    color: white;
+}
+
+.ibd-cover-wrap {
+    display: flex;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    padding: 0.15rem;
+    margin-bottom: 0.25rem;
+}
+
+.ibd-cover-wrap > img {
+    border-radius: 6px;
+}
+
+.ibd-links {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 8px;
+    padding: 0.4rem;
+}
+
+article:has( > .ibd-story) {
+    background-color: black;
+    padding: 0.5rem 0;
+    width: 100%;
+}
+
+.ibd-story {
+    padding: 0 0.4rem;
+    max-width: 1400px;
+}
+
+h3:has(+ .ibd-story) {
+    padding-bottom: 0.2rem;
+}
+
+.ibd-story > p {
+    font-size: 0.8rem;
+    line-height: 0.65rem;
+    text-align: left;
+    padding: 0.2rem 0;
+}
+
+.ibd-story > img {
+    padding: 0.6rem 0;
 }
 
 .flasher {
@@ -96,6 +189,80 @@ p {
 
     80% {
 	color: #FE74BF;
+    }
+}
+
+@keyframes slider-in {
+    0% {
+	transform: translateY(-100%);
+    }
+
+    20% {
+	transform: translateY(-80%);
+    }
+
+    40% {
+	transform: translateY(-60%);
+    }
+
+    80% {
+	transform: translateY(20%);
+    }
+}
+
+@keyframes slider-out {
+    0% {
+	transform: translateY(0%);
+	display: block;
+    }
+
+    20% {
+	transform: translateY(-40%);
+	display: block;
+    }
+
+    40% {
+	transform: translateY(-80%);
+	display: block;
+    }
+
+    60% {
+	transform: translateY(-100%);
+	display: none;
+    }
+}
+
+@media (min-width: 900px) {
+    img {
+	max-width: 600px;
+    }
+
+    main article.ibd-cover-links-wrap {
+	padding: 1rem 0 4rem 0;
+    }
+
+    .ibd-cover-links-wrap {
+        flex-direction: row;
+	align-items: center;
+    }
+
+    .ibd-cover-wrap {
+	margin-bottom: 0;
+    }
+
+    .ibd-cover-wrap > img {
+	max-width: 400px;
+    }
+
+    .ibd-links {
+	margin-left: 0.5rem;
+	justify-content: center;
+	width: 300px;
+	height: fit-content;
+    }
+    
+    h3:has(+ .ibd-story) {
+	font-size: 3rem;
     }
 }
 
