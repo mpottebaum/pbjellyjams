@@ -1,0 +1,27 @@
+{
+  "name": "pbjellyjams",
+  "version": "1.0.0",
+  "description": "potty bomber website yo what up",
+  "main": "assets/term-hanks/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "cp node_modules/@xterm/xterm/css/xterm.css assets/term-hanks/xterm.css && webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/mpottebaum/pbjellyjams.git"
+  },
+  "author": "Mike Pottebaum",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mpottebaum/pbjellyjams/issues"
+  },
+  "homepage": "https://github.com/mpottebaum/pbjellyjams#readme",
+  "dependencies": {
+    "@xterm/xterm": "^5.5.0"
+  },
+  "devDependencies": {
+    "webpack": "^5.97.0",
+    "webpack-cli": "^5.1.4"
+  }
+}
