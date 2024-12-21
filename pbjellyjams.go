@@ -2,9 +2,12 @@ package main
 
 import (
 	"embed"
+	"encoding/json"
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
+	"pbjellyjams/termhanks"
 )
 
 var PORT_STR = ":6969"
@@ -26,6 +29,35 @@ func main() {
 
 	http.HandleFunc("/term-hanks", func(w http.ResponseWriter, r *http.Request) {
 		t.ExecuteTemplate(w, "term-hanks.html", nil)
+	})
+
+	http.HandleFunc("/termias-hankas/{panelname}", func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+
+		panelname := r.PathValue("panelname")
+		panel, exists := termhanks.Panels[panelname]
+		if !exists {
+			w.WriteHeader(http.StatusNotFound)
+			resp := map[string]string{
+				"error": "that panel doesn't exist, my man",
+			}
+			json.NewEncoder(w).Encode(resp)
+			return
+		}
+
+		data, err := json.Marshal(panel)
+		if err != nil {
+			fmt.Println("Error:", err)
+			w.WriteHeader(http.StatusInternalServerError)
+			resp := map[string]string{
+				"error": "my bad bro the jsonification did not go well dog",
+			}
+			json.NewEncoder(w).Encode(resp)
+			return
+		}
+
+		fmt.Println("the data", data)
+		w.Write(data)
 	})
 
 	log.Println("listening on", PORT_STR)
