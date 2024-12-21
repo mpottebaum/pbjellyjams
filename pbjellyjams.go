@@ -44,6 +44,9 @@ func main() {
 			return
 		}
 
+		fart := termhanks.Farts[panel.Art]
+		panel.Fart = fart
+
 		data, err := json.Marshal(panel)
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
