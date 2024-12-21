@@ -147,51 +147,6 @@ const farts = {
         'something else entirely': [],
 }
 
-const thingers = {
-        tester: {
-                art: 'something',
-                text: 'this is the text yo what about it',
-                choices: [
-                        {
-                                text: 'sup yo',
-                                next: 'tester lester',
-                        },
-                        {
-                                text: 'oh no yo whoa bro',
-                                next: 'tester mester',
-                        },
-                ],
-        },
-        'tester lester': {
-                art: 'something else',
-                text: 'this is tester lester the bester let it fester',
-                choices: [
-                        {
-                                text: 'ok bro what gives',
-                                next: 'tester mester',
-                        },
-                        {
-                                text: 'live and let live my man',
-                                next: 'tester',
-                        },
-                ],
-        },
-        'tester mester': {
-                art: 'something else entirely',
-                text: 'and this is tester mester what could be better',
-                choices: [
-                        {
-                                text: 'yo yoy oy oy oya',
-                                next: 'tester lester',
-                        },
-                        {
-                                text: 'live and let live my man',
-                                next: 'tester',
-                        },
-                ],
-        },
-}
-
 const termHanksLine = document.getElementsByClassName("term-hanks-line")
 
 const NUMB_COLS = termHanks[0].length
@@ -276,13 +231,21 @@ async function typeText(text, startLineIndex) {
         return startTextIndie + endIndie
 }
 
+async function getNext(panelName) {
+        const resie = await fetch(`/termias-hankas/${panelName}`);
+        const next = await resie.json()
+        return next
+}
+
 function renderChoice(choice, indie) {
         const button = document.createElement('button')
         button.innerText = choice.text
         button.className = 'term-butt'
         button.onclick = () => {
-                const nextPanel = thingers[choice.next]
-                renderTextPanel(nextPanel)
+                getNext(choice.next)
+                        .then(nextPanel => {
+                                renderTextPanel(nextPanel)
+                        })
         }
         const el = termHanksLine[indie]
         el.replaceChildren(button)
@@ -301,7 +264,6 @@ function clearTerm() {
 
 const startTextPanelIndie = termHanksLine.length - 12
 const startTextIndie = startTextPanelIndie + 2
-console.log('start the text panel', startTextPanelIndie)
 
 function clearTextPanel() {
         for (let i = startTextPanelIndie; i < termHanksLine.length; i++) {
@@ -340,6 +302,6 @@ animateTermiasHankas().then(async () => {
         clearTextPanel()
         await typeText(introText, startTextIndie)
         await new Promise(res => setTimeout(() => res(), 3000))
-        const startPanel = thingers.tester
+        const startPanel = await getNext('tester')
         renderTextPanel(startPanel)
 })

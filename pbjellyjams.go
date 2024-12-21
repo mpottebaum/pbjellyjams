@@ -3,7 +3,6 @@ package main
 import (
 	"embed"
 	"encoding/json"
-	"fmt"
 	"html/template"
 	"log"
 	"net/http"
@@ -47,7 +46,6 @@ func main() {
 
 		data, err := json.Marshal(panel)
 		if err != nil {
-			fmt.Println("Error:", err)
 			w.WriteHeader(http.StatusInternalServerError)
 			resp := map[string]string{
 				"error": "my bad bro the jsonification did not go well dog",
@@ -56,7 +54,6 @@ func main() {
 			return
 		}
 
-		fmt.Println("the data", data)
 		w.Write(data)
 	})
 

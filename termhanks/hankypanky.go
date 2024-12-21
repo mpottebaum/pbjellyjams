@@ -1,14 +1,14 @@
 package termhanks
 
 type Choice struct {
-	Text string
-	Next string
+	Text string `json:"text"`
+	Next string `json:"next"`
 }
 
 type Panel struct {
-	Art     string
-	Text    string
-	Choices []Choice
+	Art     string   `json:"art"`
+	Text    string   `json:"text"`
+	Choices []Choice `json:"choices"`
 }
 
 var Panels = map[string]Panel{
