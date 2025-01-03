@@ -243,8 +243,8 @@ function clearTextPanel(startIndie) {
 }
 
 async function renderTextPanel(panel) {
-        const textLines = formatText(panel.text, NUMB_COLS - 1)
-        const choicesLines = panel.choices.map(choice => formatText(choice.text, NUMB_COLS - 5))
+        const textLines = formatText(panel.text, NUMB_COLS - 2)
+        const choicesLines = panel.choices.map(choice => formatText(choice.text, NUMB_COLS - 6))
         const numChoicesLines = choicesLines.reduce((sum, choiceLines) => sum + choiceLines.length, 0) + panel.choices.length
         const numTotalLines = textLines.length + numChoicesLines
         const startIndie = termHanksLine.length - numTotalLines - 2
