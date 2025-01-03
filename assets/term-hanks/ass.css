@@ -1,0 +1,32 @@
+#terminal {
+    font-family: "VT323", serif;
+    font-weight: 400;
+    background-color: black;
+    color: #77fb4c;
+    text-align: left;
+    padding: 5px;
+}
+
+.term-hanks-line {
+    font-size: 0.45rem;
+    line-height: 0.35rem;
+}
+
+.term-butt {
+    font-size: 0.45rem;
+    line-height: 0.35rem;
+    width: 100%;
+    text-align: left;
+    padding-left: 0.5rem;
+}
+
+.cursor {
+    animation: blinker 1.5s step-start 0s infinite;
+}
+
+@keyframes blinker {
+    50% {
+	color: transparent;
+    }
+}
+
