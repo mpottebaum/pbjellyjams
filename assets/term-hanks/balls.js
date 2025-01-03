@@ -149,13 +149,13 @@ const introText = 'Hello, I\'m Term Hanks. I\'m stuck in this terminal due to ge
 
 const startText = 'Will you help me get home?'
 
-function formatText(text) {
+function formatText(text, rowWidth) {
         const words = text.split(" ")
         const lines = []
         for (let i = 0, line = ""; i < words.length; i++) {
                 const word = words[i]
                 const spaceWord = " " + word
-                if ((spaceWord + line).length > NUMB_COLS - 1) {
+                if ((spaceWord + line).length > rowWidth) {
                         lines.push(line)
                         line = word
                 } else {
@@ -183,15 +183,14 @@ async function typeTextLine(text, el, isEndOfTextBlock) {
         el.innerHTML = text + cursorBlinkHtml
 }
 
-async function typeText(text, startLineIndex) {
-        const lines = formatText(text)
+async function typeText(lines, startLineIndex) {
         const endIndie = lines.length - 1
         for (let i = 0, x = startLineIndex; i < lines.length; i++, x++) {
                 const line = lines[i]
                 const el = termHanksLine[x]
                 await typeTextLine(line, el, i === endIndie)
         }
-        return startTextIndie + endIndie
+        return startLineIndex + endIndie
 }
 
 async function getNext(panelName) {
@@ -200,18 +199,22 @@ async function getNext(panelName) {
         return next
 }
 
-function renderChoice(choice, indie) {
-        const button = document.createElement('button')
-        button.innerText = choice.text
-        button.className = 'term-butt'
-        button.onclick = () => {
-                getNext(choice.next)
-                        .then(nextPanel => {
-                                renderTextPanel(nextPanel)
-                        })
+function renderChoice(choiceLines, next, startIndie) {
+        const buttons = choiceLines.map(() => document.createElement('button'))
+        for (let i = 0; i < choiceLines.length; i++) {
+                const line = choiceLines[i]
+                const button = buttons[i]
+                button.innerText = line
+                button.className = 'term-butt'
+                button.onclick = () => {
+                        getNext(next)
+                                .then(nextPanel => {
+                                        renderTextPanel(nextPanel)
+                                })
+                }
+                const el = termHanksLine[startIndie + i]
+                el.replaceChildren(button)
         }
-        const el = termHanksLine[indie]
-        el.replaceChildren(button)
 }
 
 function clearTerm() {
@@ -228,10 +231,10 @@ function clearTerm() {
 const startTextPanelIndie = termHanksLine.length - 12
 const startTextIndie = startTextPanelIndie + 2
 
-function clearTextPanel() {
-        for (let i = startTextPanelIndie; i < termHanksLine.length; i++) {
+function clearTextPanel(startIndie) {
+        for (let i = startIndie; i < termHanksLine.length; i++) {
                 const htmlLine = termHanksLine[i]
-                if (i === startTextPanelIndie) {
+                if (i === startIndie) {
                         htmlLine.innerText = '------------------------------------------'
                 } else {
                         htmlLine.innerHTML = '&nbsp;'
@@ -240,18 +243,27 @@ function clearTextPanel() {
 }
 
 async function renderTextPanel(panel) {
-        renderFart(panel.fart)
-        clearTextPanel()
-        const ender = await typeText(panel.text, startTextIndie)
+        const textLines = formatText(panel.text, NUMB_COLS - 1)
+        const choicesLines = panel.choices.map(choice => formatText(choice.text, NUMB_COLS - 5))
+        const numChoicesLines = choicesLines.reduce((sum, choiceLines) => sum + choiceLines.length, 0) + panel.choices.length
+        const numTotalLines = textLines.length + numChoicesLines
+        const startIndie = termHanksLine.length - numTotalLines - 2
+        const realStartIndie = startIndie > startTextPanelIndie ? startTextPanelIndie : startIndie
+        if (panel.fart) {
+                renderFart(panel.fart, realStartIndie)
+        }
+        clearTextPanel(realStartIndie)
+        const ender = await typeText(textLines, realStartIndie + 2)
         await new Promise(res => setTimeout(() => res(), 200))
         for (let i = 0; i < panel.choices.length; i++) {
                 const choice = panel.choices[i]
-                renderChoice(choice, ender + ((i + 1) * 2))
+                const lines = choicesLines[i]
+                renderChoice(lines, choice.next, ender + ((i + 1) * 2))
         }
 }
 
-function renderFart(fart) {
-        for (let i = 0; i < startTextPanelIndie; i++) {
+function renderFart(fart, startIndie) {
+        for (let i = 0; i < startIndie; i++) {
                 const htmlLine = termHanksLine[i]
                 const fartLine = fart[i]
                 if (fartLine) {
@@ -261,9 +273,10 @@ function renderFart(fart) {
 }
 
 animateTermiasHankas().then(async () => {
-        clearTextPanel()
-        await typeText(introText, startTextIndie)
+        clearTextPanel(startTextPanelIndie)
+        const introTextLines = formatText(introText, NUMB_COLS - 1)
+        await typeText(introTextLines, startTextIndie)
         await new Promise(res => setTimeout(() => res(), 3000))
-        const startPanel = await getNext('tester')
+        const startPanel = await getNext('start')
         renderTextPanel(startPanel)
 })
